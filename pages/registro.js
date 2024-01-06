@@ -5,7 +5,7 @@ import { encriptarPassword, validarCorreo, validarPassword } from "../helpers";
 import axios from "axios";
 import { useRouter } from "next/router";
 
-const registro = () => {
+const Registro = () => {
   const {
     setNombre,
     nombre,
@@ -138,4 +138,4 @@ const registro = () => {
   );
 };
 
-export default registro;
+export default Registro;
