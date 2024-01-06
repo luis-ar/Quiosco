@@ -6,7 +6,7 @@ import Layout from "../layout/Layout";
 import useQuiosco from "../hooks/useQuiosco";
 import Producto from "../components/Producto";
 // instalar npm i react-toastify
-const menu = () => {
+const Menu = () => {
   const { categoriaActual } = useQuiosco();
   return (
     <Layout pagina={`Menú ${categoriaActual?.nombre}`}>
@@ -22,7 +22,7 @@ const menu = () => {
     </Layout>
   );
 };
-export default menu;
+export default Menu;
 
 // export const getServerSideProps = async () => {
 //   const prisma = new PrismaClient();

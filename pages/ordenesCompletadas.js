@@ -5,7 +5,7 @@ import axios from "axios";
 import useSWR from "swr";
 import { formatearDinero } from "/helpers/index";
 import { toast } from "react-toastify";
-const ordenesCompletadas = () => {
+const OrdenesCompletadas = () => {
   const [montoRecaudado, setMontoRecaudado] = useState(0);
   const fetcher = () =>
     axios.get("/api/ordenesCompletas").then((datos) => datos.data);
@@ -57,4 +57,4 @@ const ordenesCompletadas = () => {
   );
 };
 
-export default ordenesCompletadas;
+export default OrdenesCompletadas;
