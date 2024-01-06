@@ -5,7 +5,7 @@ import { validarCorreo, validarPassword } from "../helpers";
 import axios from "axios";
 import { useRouter } from "next/router";
 
-const inicio = () => {
+export default function Home() {
   const {
     setCorreo,
     correo,
@@ -139,6 +139,4 @@ const inicio = () => {
       </form>
     </div>
   );
-};
-
-export default inicio;
+}
