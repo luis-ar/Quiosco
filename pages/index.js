@@ -79,7 +79,7 @@ export default function Home() {
           <Image
             width={400}
             height={150}
-            src="/assets/img/logo.svg"
+            src="/assets/img/logo.jpg"
             alt="imagen logotipo"
           />
         </aside>
