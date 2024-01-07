@@ -15,7 +15,7 @@ const Categoria = ({ categoria }) => {
         width={70}
         height={70}
         alt="Imagen Icono"
-        src={`/assets/img/icono_${icono}.svg`}
+        src={`/assets/img/icono_${icono}.png`}
       />
       <button type="button" className="text-2xl font-bold ">
         {nombre}

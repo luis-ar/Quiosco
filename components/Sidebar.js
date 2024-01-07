@@ -9,7 +9,7 @@ const Sidebar = () => {
         <img
           width={200}
           height={80}
-          src="/assets/img/logo.svg"
+          src="/assets/img/logo.jpg"
           alt="imagen logotipo"
           className="m-auto pt-3"
         />

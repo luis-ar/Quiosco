@@ -18,7 +18,7 @@ export default function AdminLayout({ children, pagina }) {
           <img
             width={300}
             height={100}
-            src="/assets/img/logo.svg"
+            src="/assets/img/logo.jpg"
             alt="imagen logotipo"
             className="mt-14 md:mt-20 w-1/3 md:w-4/5"
           />
