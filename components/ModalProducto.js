@@ -18,7 +18,7 @@ const ModalProducto = () => {
   }, [producto, pedido]);
 
   return (
-    <div className="md:flex gap-16 mt-20 md:mt-0">
+    <div className="md:flex gap-16 mt-2">
       <div
         className="flex justify-end absolute right-3 "
         onClick={handleChangeModal}
