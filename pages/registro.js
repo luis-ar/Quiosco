@@ -64,11 +64,12 @@ const Registro = () => {
     <div className="flex items-center flex-col">
       <div>
         <aside className=" flex justify-center pt-10 pb-5">
-          <Image
-            width={400}
-            height={150}
+          <img
+            width={200}
+            height={200}
             src="/assets/img/logo.jpg"
             alt="imagen logotipo"
+            className="rounded-xl"
           />
         </aside>
       </div>
