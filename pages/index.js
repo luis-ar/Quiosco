@@ -45,21 +45,27 @@ export default function Home() {
         password,
       });
       const { data } = respuesta;
-      const { usuario } = data;
-      const { nombre } = usuario;
-      setNombre(nombre);
-      localStorage.setItem("nombre", nombre);
-      localStorage.setItem("correo", usuario.correo);
+
       // localStorage.setItem("correo", correo);
-      if (data.respuesta === 0) {
+      if (data.respuesta == 0 || data == 0) {
         setMensaje("Usuario no Encontrado");
         limpiar();
       } else if (data.respuesta == 1) {
         setMensaje("Contraseña Incorrecta");
         limpiar();
       } else if (data.respuesta == 2) {
+        const { usuario } = data;
+        const { nombre } = usuario;
+        setNombre(nombre);
+        localStorage.setItem("nombre", nombre);
+        localStorage.setItem("correo", usuario.correo);
         router.push("/menu");
       } else {
+        const { usuario } = data;
+        const { nombre } = usuario;
+        setNombre(nombre);
+        localStorage.setItem("nombre", nombre);
+        localStorage.setItem("correo", usuario.correo);
         router.push("/admin");
       }
     } catch (error) {

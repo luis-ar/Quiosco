@@ -16,6 +16,7 @@ const customStyles = {
     bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
+    
   },
 };
 Modal.setAppElement("#__next");
@@ -43,7 +44,7 @@ export default function Layout({ children, pagina }) {
       </div>
       {modal && (
         <Modal isOpen={modal} style={customStyles}>
-          <ModalProducto />
+          <ModalProducto  />
         </Modal>
       )}
       <ToastContainer />

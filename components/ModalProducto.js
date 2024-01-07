@@ -18,9 +18,9 @@ const ModalProducto = () => {
   }, [producto, pedido]);
 
   return (
-    <div className="md:flex gap-16 ">
+    <div className="md:flex gap-16 mt-20 md:mt-0">
       <div
-        className="flex justify-end absolute right-5"
+        className="flex justify-end absolute right-3 "
         onClick={handleChangeModal}
       >
         <button>
@@ -41,11 +41,10 @@ const ModalProducto = () => {
         </button>
       </div>
       <div className="md:w-1/3 flex justify-center">
-        <Image
-          width={300}
-          height={400}
+        <img
           alt={`imagen producto ${producto.nombre}`}
           src={`/assets/img/${producto.imagen}.jpg`}
+          className="w-64"
         />
       </div>
       <div className="md:w-2/3 flex items-center flex-col md:block">
