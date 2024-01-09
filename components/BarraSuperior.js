@@ -59,6 +59,7 @@ const BarraSuperior = () => {
         <div
           onMouseOver={() => {
             setMostrarContenido(true);
+            setNotificacion(false);
           }}
           onMouseOut={() => {
             setMostrarContenido(false);
@@ -90,12 +91,11 @@ const BarraSuperior = () => {
         <div
           onMouseOver={() => {
             setMostrarContenido(true);
-            setNotificacion(false);
           }}
-          // onMouseOut={() => setMostrarContenido(false)}
+          onMouseOut={() => setMostrarContenido(false)}
           className={`${
-            router.pathname !== "/admin" &&
-            router.pathname !== "/ordenesCompletadas" &&
+            router.pathname == "/admin" &&
+            router.pathname == "/ordenesCompletadas" &&
             "h-48"
           } bg-gray-100 md:mt-20 h-40 w-72 mt-14 fixed right-0 border z-20`}
         >
