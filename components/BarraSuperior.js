@@ -115,9 +115,10 @@ const BarraSuperior = () => {
             <div
               className={`${
                 router.pathname !== "/admin" &&
-                router.pathname !== "/ordenesCompletadas" &&
-                "h-2/4"
-              } flex h-3/4`}
+                router.pathname !== "/ordenesCompletadas"
+                  ? "h-2/4"
+                  : "h-3/4"
+              } flex `}
             >
               <div className="w-1/3 flex items-center pl-2">
                 <button className="hover:cursor-default bg-white rounded-full w-20 flex items-center justify-center h-20 ">
