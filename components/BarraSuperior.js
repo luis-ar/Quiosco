@@ -92,7 +92,7 @@ const BarraSuperior = () => {
             setMostrarContenido(true);
             setNotificacion(false);
           }}
-          onMouseOut={() => setMostrarContenido(false)}
+          // onMouseOut={() => setMostrarContenido(false)}
           className={`${
             router.pathname !== "/admin" &&
             router.pathname !== "/ordenesCompletadas" &&
