@@ -58,7 +58,9 @@ const BarraSuperior = () => {
       <div className="w-full md:h-20 h-14 bg-amber-500 fixed flex items-center justify-end z-20">
         <div
           onMouseOver={() => {
-            setMostrarContenido(true), setNotificacion(true);
+            setMostrarContenido(true);
+            setNotificacion(false);
+            alert("hola")
           }}
           onMouseOut={() => {
             setMostrarContenido(false);
