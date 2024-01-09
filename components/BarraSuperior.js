@@ -14,11 +14,17 @@ const BarraSuperior = () => {
     useQuiosco();
   const [email, setEmail] = useState("");
   const router = useRouter();
-  const fetcher = () =>
-    axios.get(`/api/user/${codigo}`).then((datos) => datos.data);
+  const fetcher = () => {
+    if (codigo !== undefined) {
+      return axios.get(`/api/user/${codigo}`).then((datos) => datos.data);
+    }
+    return Promise.reject("Codigo is undefined");
+  };
+
   const { data, error, isLoading } = useSWR(`/api/user/${codigo}`, fetcher, {
     refreshInterval: 100,
   });
+
   useEffect(() => {
     if (data !== undefined) {
       setMensajes(data[0].mensajes);
@@ -88,7 +94,7 @@ const BarraSuperior = () => {
           className={`${
             router.pathname !== "/admin" &&
             router.pathname !== "/ordenesCompletadas" &&
-            "h-52"
+            "h-48"
           } bg-gray-100 md:mt-20 h-40 w-72 mt-14 fixed right-0 border z-20`}
         >
           <div className="flex h-1/4 border-b-2 border-gray-300">
