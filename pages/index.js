@@ -14,6 +14,7 @@ export default function Home() {
     mensaje,
     setMensaje,
     setNombre,
+    setCodigo,
   } = useQuiosco();
   const router = useRouter();
   const limpiar = () => {
@@ -55,16 +56,20 @@ export default function Home() {
         limpiar();
       } else if (data.respuesta == 2) {
         const { usuario } = data;
-        const { nombre } = usuario;
+        const { nombre, id } = usuario;
+        setCodigo(id);
         setNombre(nombre);
         localStorage.setItem("nombre", nombre);
+        localStorage.setItem("codigo", id);
         localStorage.setItem("correo", usuario.correo);
         router.push("/menu");
       } else {
         const { usuario } = data;
-        const { nombre } = usuario;
+        const { nombre, id } = usuario;
+        setCodigo(id);
         setNombre(nombre);
         localStorage.setItem("nombre", nombre);
+        localStorage.setItem("codigo", id);
         localStorage.setItem("correo", usuario.correo);
         router.push("/admin");
       }
@@ -135,6 +140,8 @@ export default function Home() {
           <div
             onClick={() => {
               router.push("/registro");
+              setCorreo("");
+              setPassword("");
             }}
           >
             ¿No tienes cuenta?

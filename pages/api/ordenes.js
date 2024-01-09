@@ -9,6 +9,9 @@ export default async function handler(req, res) {
       where: {
         estado: false,
       },
+      include: {
+        usuario: true,
+      },
     });
     res.status(200).json(ordenes);
   }
@@ -18,10 +21,10 @@ export default async function handler(req, res) {
     console.log(req.body);
     const orden = await prisma.orden.create({
       data: {
-        nombre: req.body.nombre,
         total: req.body.total,
         pedido: req.body.pedido,
         fecha: req.body.fecha,
+        usuarioId: parseInt(req.body.codigo),
       },
     });
 

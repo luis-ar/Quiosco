@@ -26,20 +26,23 @@ model Categoria{
   icono String
   productos Producto[]
 }
-model Usuario{
-  id Int @id @default(autoincrement())
-  nombre String
-  correo String @unique
+model Usuario {
+  id       Int     @id @default(autoincrement())
+  nombre   String
+  correo   String  @unique
   password String
   mensajes Json
+  ordenes   Orden[]  // Relación: Un usuario puede tener múltiples órdenes
 }
-model Orden{
-  id Int @id @default(autoincrement())
-  nombre String
-  fecha String
-  total Float
+
+model Orden {
+  id     Int    @id @default(autoincrement())
+  fecha  String
+  total  Float
   pedido Json
   estado Boolean @default(false)
+  usuarioId Int   // Campo que contendrá el ID del usuario al que pertenece la orden
+  usuario   Usuario @relation(fields: [usuarioId], references: [id]) // Relación: Una orden pertenece a un usuario
 }
 
 

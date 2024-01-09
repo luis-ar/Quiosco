@@ -42,14 +42,16 @@ const Registro = () => {
     }
     const passwordEncriptado = await encriptarPassword(password);
     try {
-      await axios.post("/api/registro", {
+      const user = await axios.post("/api/registro", {
         nombre,
         passwordEncriptado,
         correo,
       });
+      const { data } = user;
       router.push("/menu");
       localStorage.setItem("nombre", nombre);
       localStorage.setItem("correo", correo);
+      localStorage.setItem("codigo", data.id);
     } catch (error) {
       setMensaje("Usuario Existente");
       setTimeout(() => {

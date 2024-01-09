@@ -15,6 +15,7 @@ const QuioscoProvider = ({ children }) => {
   const [correo, setCorreo] = useState("");
   const [password, setPassword] = useState("");
   const [mensaje, setMensaje] = useState("");
+  const [codigo, setCodigo] = useState();
   const router = useRouter();
   const obtenerCategorias = async () => {
     const { data } = await axios("/api/categorias");
@@ -73,9 +74,9 @@ const QuioscoProvider = ({ children }) => {
     try {
       await axios.post("/api/ordenes", {
         pedido,
-        nombre,
         total,
         fecha: Date.now().toString(),
+        codigo,
       });
 
       //resetear la app
@@ -115,6 +116,8 @@ const QuioscoProvider = ({ children }) => {
         password,
         mensaje,
         setMensaje,
+        setCodigo,
+        codigo,
       }}
     >
       {children}

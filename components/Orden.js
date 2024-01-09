@@ -7,13 +7,21 @@ import { useRouter } from "next/router";
 import { formatDistanceToNow } from "date-fns";
 import esLocale from "date-fns/locale/es";
 
-const Orden = ({ orden }) => {
-  const { fecha, pedido, id, nombre, total } = orden;
+const Orden = ({ orden, indice }) => {
+  const { fecha, pedido, id, usuario, total } = orden;
+  const { nombre, mensajes } = usuario;
   const router = useRouter();
   const lugar = router.pathname;
   const completarOrden = async () => {
     try {
+      const codigo = usuario.id;
+      const nuevoMensaje = {
+        mensaje: "Su pedido se encuentra listo",
+        fecha: Date.now().toString(),
+      };
+      const nuevo = [nuevoMensaje, ...mensajes];
       const { data } = await axios.post(`/api/ordenes/${id}`);
+      const { data1 } = await axios.post(`/api/mensajes/${codigo}`, nuevo);
       toast.success("Pedido Completado");
     } catch (error) {
       console.log(error);
@@ -26,7 +34,7 @@ const Orden = ({ orden }) => {
   };
   return (
     <div className="border p-10 space-y-5">
-      <h3 className="text-2xl font-bold">Orden: {id}</h3>
+      <h3 className="text-2xl font-bold">Orden: {indice}</h3>
       <p className="text-lg font-bold">Cliente: {nombre}</p>
       <p className="text-sm font-bold">
         Pedido hace: {formatearTiempoPublicacion(parseInt(fecha))}

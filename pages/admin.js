@@ -16,7 +16,9 @@ export default function Admin() {
       <p className="text-2xl my-10 text-center">Administra tus Ordenes</p>
 
       {data && data.length ? (
-        data.map((orden) => <Orden key={orden.id} orden={orden} />)
+        data.map((orden, index) => (
+          <Orden key={orden.id} orden={orden} indice={index + 1} />
+        ))
       ) : (
         <p>No hay ordenes pendientes </p>
       )}
