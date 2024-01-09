@@ -22,7 +22,7 @@ const BarraSuperior = () => {
   };
 
   const { data, error, isLoading } = useSWR(`/api/user/${codigo}`, fetcher, {
-    refreshInterval: 100,
+    refreshInterval: 1000,
   });
 
   useEffect(() => {

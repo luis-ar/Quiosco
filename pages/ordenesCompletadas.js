@@ -10,7 +10,7 @@ const OrdenesCompletadas = () => {
   const fetcher = () =>
     axios.get("/api/ordenesCompletas").then((datos) => datos.data);
   const { data, error, isLoading } = useSWR("/api/ordenesCompletas", fetcher, {
-    refreshInterval: 100,
+    refreshInterval: 1000,
   });
   useEffect(() => {
     if (data?.length > 0) {
