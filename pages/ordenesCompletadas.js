@@ -49,7 +49,9 @@ const OrdenesCompletadas = () => {
       )}
 
       {data && data.length ? (
-        data.map((orden) => <Orden key={orden.id} orden={orden} />)
+        data.map((orden, index) => (
+          <Orden key={orden.id} orden={orden} indice={index + 1} />
+        ))
       ) : (
         <p>No hay ordenes terminadas </p>
       )}

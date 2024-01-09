@@ -8,6 +8,10 @@ export default async function handler(req, res) {
     where: {
       estado: true,
     },
+
+    include: {
+      usuario: true,
+    },
   });
   res.status(200).json(ordenes);
 }
