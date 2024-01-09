@@ -59,11 +59,11 @@ const BarraSuperior = () => {
         <div
           onMouseOver={() => {
             setMostrarContenido(true);
-            // setNotificacion(false);
+            setNotificacion(false);
           }}
-          // onMouseOut={() => {
-          //   setMostrarContenido(false);
-          // }}
+          onMouseOut={() => {
+            setMostrarContenido(false);
+          }}
           className="h-full flex items-center relative"
         >
           {router.pathname !== "/admin" &&
@@ -74,7 +74,6 @@ const BarraSuperior = () => {
             )}
 
           <button className="flex justify-center items-center mr-6 bg-amber-800 p-3 md:p-4 rounded-full h-10 w-10 md:w-14 md:h-14">
-            {/* Agrega tu código para la imagen de perfil aquí */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 448 512"
@@ -91,7 +90,7 @@ const BarraSuperior = () => {
       {mostrarContenido && (
         <div
           onMouseOver={() => setMostrarContenido(true)}
-          // onMouseOut={() => setMostrarContenido(false)}
+          onMouseOut={() => setMostrarContenido(false)}
           className={`${
             router.pathname !== "/admin" &&
             router.pathname !== "/ordenesCompletadas" &&
