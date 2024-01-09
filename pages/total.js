@@ -46,7 +46,7 @@ export default function Total() {
             className={`${
               comprobarPedido()
                 ? "bg-indigo-300"
-                : " bg-indigo-600 hover:bg-indigo-800"
+                : " bg-indigo-600 hover:bg-indigo-800 cursor-pointer"
             } text-center w-full lg:w-auto px-5 py-2 rounded uppercase font-bold text-white`}
             value="Confirmar pedido"
             disabled={comprobarPedido()}

@@ -133,7 +133,7 @@ const Registro = () => {
           <input
             value={"Registrarse"}
             type="submit"
-            className="bg-indigo-600 hover:bg-indigo-800 text-white mt-5 md:mt-0 py-3 px-5  uppercase font-bold rounded w-full"
+            className="bg-indigo-600 cursor-pointer hover:bg-indigo-800 text-white mt-5 md:mt-0 py-3 px-5  uppercase font-bold rounded w-full"
           />
         </div>
       </form>
