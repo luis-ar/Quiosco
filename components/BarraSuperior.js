@@ -14,9 +14,10 @@ const BarraSuperior = () => {
     useQuiosco();
   const [email, setEmail] = useState("");
   const router = useRouter();
-  const fetcher = () => {
+  const fetcher = async () => {
     if (codigo !== undefined) {
-      return axios.get(`/api/user/${codigo}`).then((datos) => datos.data);
+      const datos = await axios.get(`/api/user/${codigo}`);
+      return datos.data;
     }
     return Promise.reject("Codigo is undefined");
   };
@@ -63,6 +64,7 @@ const BarraSuperior = () => {
           }}
           onMouseOut={() => {
             setMostrarContenido(false);
+            setNotificacion(false);
           }}
           className="h-full flex items-center relative"
         >
