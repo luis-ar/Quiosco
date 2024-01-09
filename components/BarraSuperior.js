@@ -94,10 +94,11 @@ const BarraSuperior = () => {
           }}
           onMouseOut={() => setMostrarContenido(false)}
           className={`${
-            router.pathname == "/admin" &&
-            router.pathname == "/ordenesCompletadas" &&
-            "h-48"
-          } bg-gray-100 md:mt-20 h-40 w-72 mt-14 fixed right-0 border z-20`}
+            router.pathname !== "/admin" &&
+            router.pathname !== "/ordenesCompletadas"
+              ? "h-48"
+              : "h-40"
+          } bg-gray-100 md:mt-20 w-72 mt-14 fixed right-0 border z-20`}
         >
           <div className="flex h-1/4 border-b-2 border-gray-300">
             <p className="w-1/2 font-bold  flex items-center justify-center">
