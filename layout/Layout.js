@@ -41,7 +41,7 @@ export default function Layout({ children, pagina }) {
           </div>
         </main>
         <div className="fixed bottom-4 right-6 bg-white rounded-2xl ">
-          <a target="_blank" href=" https://w.app/HxS0e5">
+          <a target="_blank" href="https://wa.link/tprwxl">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               height="16"
