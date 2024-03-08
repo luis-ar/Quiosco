@@ -39,7 +39,10 @@ const QuioscoProvider = ({ children }) => {
   const handleClickCategoria = (id) => {
     const categoria = categorias.filter((cat) => cat.id === id);
     setCategoriaActual(categoria[0]);
-    router.push("/menu");
+    const element = document.getElementById(`prueba`);
+    if (element) {
+      router.push("/menu#prueba");
+    }
   };
   const handleSetProducto = (producto) => {
     setProducto(producto);

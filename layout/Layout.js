@@ -35,13 +35,16 @@ export default function Layout({ children, pagina }) {
         </aside>
 
         <main className="md:w-8/12 md:mt-20 xl:w-3/4 2xl:w-4/5 h-screen overflow-y-scroll">
-          <div className="p-10">
+          <div id="prueba" className="p-10">
             <Pasos />
             {children}
           </div>
         </main>
         <div className="fixed bottom-4 right-6 bg-white rounded-2xl ">
-          <a target="_blank" href="https://api.whatsapp.com/send?phone=51977711008&text=estoy%20realizando%20mi%20pedido%20%F0%9F%98%80">
+          <a
+            target="_blank"
+            href="https://api.whatsapp.com/send?phone=51977711008&text=estoy%20realizando%20mi%20pedido%20%F0%9F%98%80"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               height="16"

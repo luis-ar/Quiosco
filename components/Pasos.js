@@ -4,8 +4,8 @@ import useQuiosco from "../hooks/useQuiosco";
 
 const pasos = [
   { paso: 1, nombre: "Menú", url: "/menu" },
-  { paso: 2, nombre: "Resumen", url: "/resumen" },
-  { paso: 3, nombre: "Datos y Total", url: "/total" },
+  { paso: 2, nombre: "Resumen", url: "/resumen#prueba" },
+  { paso: 3, nombre: "Datos y Total", url: "/total#prueba" },
 ];
 const Pasos = () => {
   let paso;
