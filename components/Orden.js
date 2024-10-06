@@ -20,63 +20,59 @@ const Orden = ({ orden, indice }) => {
         fecha: Date.now().toString(),
       };
       const nuevo = [nuevoMensaje, ...mensajes];
-      const { data } = await axios.post(`/api/ordenes/${id}`);
-      const { data1 } = await axios.post(`/api/mensajes/${codigo}`, nuevo);
-      toast.success("Pedido Completado");
+      await axios.post(`/api/mensajes/${codigo}`, nuevo);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const prepararPedido = async (idPlatillo, estado) => {
+    try {
+      const { data } = await axios.post(
+        `/api/pedido/${id}?estado=${estado}&idPlatillo=${idPlatillo}`
+      );
+      const todosPlatillosCompletados = data.pedido.every(
+        (platillo) => platillo.estado === 2
+      );
+      if (todosPlatillosCompletados) {
+        completarOrden();
+      }
     } catch (error) {
       console.log(error);
       toast.error("Hubo un error");
     }
   };
-  const formatearTiempoPublicacion = (timestamp) => {
-    const fecha = new Date(timestamp);
-    return formatDistanceToNow(fecha, { addSuffix: false, locale: esLocale });
-  };
+
   return (
-    <div className="border p-10 space-y-5">
-      <h3 className="text-2xl font-bold">Orden: {indice}</h3>
-      <p className="text-lg font-bold">Cliente: {nombre}</p>
-      <p className="text-sm font-bold">
-        Pedido hace: {formatearTiempoPublicacion(parseInt(fecha))}
-      </p>
+    <div className="border p-2 space-y-1" key={pedido.id}>
       <div>
         {pedido.map((platillo) => (
-          <div
-            key={platillo.id}
-            className="py-1 flex flex-col md:flex-row border-b last-of-type:border-0 items-center "
-          >
-            <div className="w-32">
-              <Image
-                width={400}
-                height={500}
-                src={`/assets/img/${platillo.imagen}.jpg`}
-                alt={`Imagen Platillo ${platillo.nombre}`}
-              />
+          <>
+            <div
+              key={platillo.id}
+              className="py-1 flex flex-col md:flex-row border-b last-of-type:border-0 items-center "
+            >
+              <div className="px-1 space-y-1 text-center md:text-start flex gap-3 items-center w-full ">
+                <div className="flex-1">
+                  <h4 className="text-sm font-bold ">{platillo.nombre}</h4>
+                  <p className="text-sm font-bold">
+                    Cantidad: {platillo.cantidad}
+                  </p>
+                </div>
+                <button
+                  className={`${
+                    platillo.estado === 0 ? "bg-green-600" : "bg-red-500"
+                  } text-white font-bold p-2 rounded h-10`}
+                  onClick={() => {
+                    prepararPedido(platillo.id, platillo.estado + 1);
+                  }}
+                >
+                  {platillo.estado === 0 ? "Preparar" : "Finalizar"}
+                </button>
+              </div>
             </div>
-            <div className="p-5 space-y-2 text-center md:text-start">
-              <h4 className="text-xl font-bold text-amber-500">
-                {platillo.nombre}
-              </h4>
-              <p className="text-lg font-bold">Cantidad: {platillo.cantidad}</p>
-            </div>
-          </div>
+          </>
         ))}
-      </div>
-      <div className="md:flex md:items-center md:justify-between my-10">
-        <p className=" font-black md:text-3xl text-amber-500">
-          Total a pagar :{" "}
-          <span className="md:text-4xl">{formatearDinero(total)}</span>
-        </p>
-
-        {lugar !== "/ordenesCompletadas" && (
-          <button
-            onClick={completarOrden}
-            type="button"
-            className="bg-indigo-600 hover:bg-indigo-800 text-white mt-5 md:mt-0 py-3 px-5  uppercase font-bold rounded"
-          >
-            Completar Orden
-          </button>
-        )}
       </div>
     </div>
   );

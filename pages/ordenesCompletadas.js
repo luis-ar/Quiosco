@@ -5,6 +5,7 @@ import axios from "axios";
 import useSWR from "swr";
 import { formatearDinero } from "/helpers/index";
 import { toast } from "react-toastify";
+import ResumenVentas from "../components/ResumenVentas";
 const OrdenesCompletadas = () => {
   const [montoRecaudado, setMontoRecaudado] = useState(0);
   const fetcher = () =>
@@ -50,7 +51,7 @@ const OrdenesCompletadas = () => {
 
       {data && data.length ? (
         data.map((orden, index) => (
-          <Orden key={orden.id} orden={orden} indice={index + 1} />
+          <ResumenVentas key={orden.id} orden={orden} indice={index + 1} />
         ))
       ) : (
         <p>No hay ordenes terminadas </p>
