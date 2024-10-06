@@ -11,13 +11,24 @@ export default function Admin() {
   });
 
   const pedidoPreparando = data
-    ? data.filter((orden) => orden.pedido.some((item) => item.estado === 1))
+    ? data
+        .map((orden) => ({
+          ...orden,
+          pedido: orden.pedido.filter((item) => item.estado === 1), // Filtrar solo los pedidos con estado 1
+        }))
+        .filter((orden) => orden.pedido.length > 0)
     : [];
 
   const pedidoEnEspera = data
-    ? data.filter((orden) => orden.pedido.some((item) => item.estado === 0))
+    ? data
+        .map((orden) => ({
+          ...orden, // Conservar otros campos de la orden
+          pedido: orden.pedido.filter((item) => item.estado === 0),
+        }))
+        .filter((orden) => orden.pedido.length > 0)
     : [];
-
+  console.log(pedidoEnEspera);
+  console.log(pedidoPreparando);
   return (
     <AdminLayout pagina={"Admin"}>
       {data && data.length ? (

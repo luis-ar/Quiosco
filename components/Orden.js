@@ -9,7 +9,7 @@ import esLocale from "date-fns/locale/es";
 
 const Orden = ({ orden, indice }) => {
   const { fecha, pedido, id, usuario, total } = orden;
-  const { nombre, mensajes } = usuario;
+  const { mensajes } = usuario;
   const router = useRouter();
   const lugar = router.pathname;
   const completarOrden = async () => {
