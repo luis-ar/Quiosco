@@ -24,7 +24,7 @@ export default function AdminLayout({ children, pagina }) {
           />
         </aside>
 
-        <main className="md:w-8/12 md:mt-20 xl:w-3/4 2xl:w-4/5 h-screen overflow-y-scroll p-10">
+        <main className="md:w-8/12 md:mt-20 xl:w-3/4 2xl:w-4/5 h-screen overflow-y-scroll p-3">
           <PasosAdmin />
           <div>{children}</div>
         </main>

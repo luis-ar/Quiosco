@@ -54,15 +54,14 @@ const Orden = ({ orden, indice }) => {
             >
               <div className="px-1 space-y-1 text-center md:text-start flex gap-3 items-center w-full ">
                 <div className="flex-1">
-                  <h4 className="text-sm font-bold ">{platillo.nombre}</h4>
-                  <p className="text-sm font-bold">
-                    Cantidad: {platillo.cantidad}
-                  </p>
+                  <h4 className="text-lg font-bold ">
+                    {platillo.nombre} <span>{platillo.cantidad}</span>
+                  </h4>
                 </div>
                 <button
                   className={`${
                     platillo.estado === 0 ? "bg-green-600" : "bg-red-500"
-                  } text-white font-bold p-2 rounded h-10`}
+                  } text-white font-bold p-2 rounded h-10 text-xs`}
                   onClick={() => {
                     prepararPedido(platillo.id, platillo.estado + 1);
                   }}

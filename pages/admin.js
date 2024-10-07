@@ -27,8 +27,6 @@ export default function Admin() {
         }))
         .filter((orden) => orden.pedido.length > 0)
     : [];
-  console.log(pedidoEnEspera);
-  console.log(pedidoPreparando);
   return (
     <AdminLayout pagina={"Admin"}>
       {data && data.length ? (
