@@ -5,14 +5,8 @@ export default async function handler(req, res) {
 
   //obtener ordenes
   if (req.method === "GET") {
-    const ordenes = await prisma.orden.findMany({
-      where: {
-        estado: false,
-      },
-      include: {
-        usuario: true,
-      },
-    });
+    const ordenes =
+      await prisma.$queryRaw`SELECT o.*, o.id AS ordenId, u.*, u.id AS usuarioId FROM Orden o LEFT JOIN Usuario u ON o.usuarioId = u.id WHERE o.estado = false`;
     res.status(200).json(ordenes);
   }
 

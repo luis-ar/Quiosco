@@ -20,7 +20,7 @@ export default function AdminLayout({ children, pagina }) {
             height={100}
             src="/assets/img/logo.jpg"
             alt="imagen logotipo"
-            className="mt-14 md:mt-20 w-1/3 md:w-4/5"
+            className="mt-14 md:mt-20 w-1/3 md:w-4/5 hidden md:block"
           />
         </aside>
 

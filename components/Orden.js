@@ -1,26 +1,20 @@
-import Image from "next/image";
 import React from "react";
-import { formatearDinero } from "/helpers/index";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
-import { formatDistanceToNow } from "date-fns";
-import esLocale from "date-fns/locale/es";
 
 const Orden = ({ orden, indice }) => {
-  const { fecha, pedido, id, usuario, total } = orden;
-  const { mensajes } = usuario;
-  const router = useRouter();
-  const lugar = router.pathname;
+  const { pedido, id, mensajes, ordenId } = orden;
+  mensajes = JSON.parse(mensajes);
   const completarOrden = async () => {
     try {
-      const codigo = usuario.id;
       const nuevoMensaje = {
         mensaje: "Su pedido se encuentra listo",
         fecha: Date.now().toString(),
       };
       const nuevo = [nuevoMensaje, ...mensajes];
-      await axios.post(`/api/mensajes/${codigo}`, nuevo);
+
+      await axios.post(`/api/mensajes/${id}`, nuevo);
     } catch (error) {
       console.log(error);
     }
@@ -28,13 +22,12 @@ const Orden = ({ orden, indice }) => {
 
   const prepararPedido = async (idPlatillo, estado) => {
     try {
+      console.log("probandood");
       const { data } = await axios.post(
-        `/api/pedido/${id}?estado=${estado}&idPlatillo=${idPlatillo}`
+        `/api/pedido/${ordenId}?estado=${estado}&idPlatillo=${idPlatillo}`
       );
-      const todosPlatillosCompletados = data.pedido.every(
-        (platillo) => platillo.estado === 2
-      );
-      if (todosPlatillosCompletados) {
+
+      if (data) {
         completarOrden();
       }
     } catch (error) {

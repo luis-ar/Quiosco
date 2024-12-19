@@ -16,7 +16,7 @@ const PasosAdmin = () => {
   }
   return (
     <>
-      <div className="flex justify-between mb-5">
+      <div className="flex justify-between my-5">
         {pasos.map((paso) => (
           <button
             className="text-sm md:text-2xl font-bold"

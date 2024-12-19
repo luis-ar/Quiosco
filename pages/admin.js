@@ -7,24 +7,29 @@ import renderOrdersSection from "../components/FiltroEstadosPedido";
 export default function Admin() {
   const fetcher = () => axios.get("/api/ordenes").then((datos) => datos.data);
   const { data, error, isLoading } = useSWR("/api/ordenes", fetcher, {
-    refreshInterval: 100,
+    refreshInterval: 5,
   });
-
   const pedidoPreparando = data
     ? data
-        .map((orden) => ({
-          ...orden,
-          pedido: orden.pedido.filter((item) => item.estado === 1), // Filtrar solo los pedidos con estado 1
-        }))
+        .map((orden) => {
+          const pedidos = JSON.parse(orden.pedido);
+          return {
+            ...orden,
+            pedido: pedidos.filter((item) => item.estado === 1),
+          };
+        })
         .filter((orden) => orden.pedido.length > 0)
     : [];
 
   const pedidoEnEspera = data
     ? data
-        .map((orden) => ({
-          ...orden, // Conservar otros campos de la orden
-          pedido: orden.pedido.filter((item) => item.estado === 0),
-        }))
+        .map((orden) => {
+          const pedidos = JSON.parse(orden.pedido);
+          return {
+            ...orden,
+            pedido: pedidos.filter((item) => item.estado === 0),
+          };
+        })
         .filter((orden) => orden.pedido.length > 0)
     : [];
   return (

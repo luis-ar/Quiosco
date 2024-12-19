@@ -1,60 +1,51 @@
 import { PrismaClient } from "@prisma/client";
 
+const prisma = new PrismaClient();
+const COMPLETED_STATE = 2;
+
 export default async function handler(req, res) {
-  const prisma = new PrismaClient();
+  // if (req.method !== "POST") {
+  //   return res.status(405).json({ error: "Método no permitido" });
+  // }
+  const { id, idPlatillo, estado } = req.query;
+  const orderId = parseInt(id);
+  const platilloId = parseInt(idPlatillo);
+  const newEstado = parseInt(estado);
 
-  if (req.method === "POST") {
-    const { id, idPlatillo, estado } = req.query;
+  try {
+    const orden = await prisma.$queryRaw`
+  SELECT id, estado, pedido
+  FROM Orden
+  WHERE id = ${orderId}
+`;
+    const pedido = JSON.parse(orden[0].pedido);
 
-    try {
-      // 1. Buscar la orden usando el ID
-      const orden = await prisma.orden.findUnique({
-        where: {
-          id: parseInt(id),
-        },
-        include: {
-          usuario: true, // Asegúrate de tener los datos del usuario relacionados
-        },
-      });
-      if (!orden) {
-        return res.status(404).json({ error: "Orden no encontrada" });
+    const pedidoActualizado = pedido.map((platillo) => {
+      if (platillo.id === platilloId) {
+        platillo.estado = newEstado;
       }
+      return platillo;
+    });
 
-      // 2. Buscar el platillo dentro del campo "pedido" (array de objetos)
-      const pedidoActualizado = orden.pedido.map((platillo) => {
-        if (platillo.id === parseInt(idPlatillo)) {
-          // 3. Actualizar el campo "estado" del platillo
-          return { ...platillo, estado: parseInt(estado) };
-        }
-        return platillo;
-      });
-
-      // 4. Verificar si todos los platillos tienen estado 2
-      const todosPlatillosCompletados = pedidoActualizado.every(
-        (platillo) => platillo.estado === 2
-      );
-
-      // 5. Actualizar el estado de la orden si todos los platillos tienen estado 2
-      const ordenActualizada = await prisma.orden.update({
-        where: {
-          id: parseInt(id),
-        },
-        data: {
-          pedido: pedidoActualizado,
-          estado: todosPlatillosCompletados ? true : orden.estado,
-        },
-      });
-
-      // 6. Si todos los platillos están completados, envía el mensaje al usuario
-
-      res.status(200).json(ordenActualizada);
-    } catch (error) {
-      console.error("Error actualizando la orden: ", error);
-      res.status(500).json({ error: "Error actualizando la orden" });
-    } finally {
-      await prisma.$disconnect();
-    }
-  } else {
-    res.status(405).json({ error: "Método no permitido" });
+    const allCompleted = pedidoActualizado.every(
+      (platillo) => platillo.estado === COMPLETED_STATE
+    );
+    await prisma.$queryRaw`
+      UPDATE Orden
+      SET estado = ${allCompleted},
+          pedido = ${JSON.stringify(pedidoActualizado)}
+      WHERE id = ${orderId}
+    `;
+    // const ordenActualizada = await prisma.$queryRaw`
+    //   SELECT pedido
+    //   FROM Orden
+    //   WHERE id = ${orderId}
+    // `;
+    return res.status(200).json(allCompleted);
+  } catch (error) {
+    console.error("Error actualizando la orden:", error);
+    return res
+      .status(error.code === "P2025" ? 404 : 500)
+      .json({ error: error.message });
   }
 }
